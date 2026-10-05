@@ -38,6 +38,8 @@ func GetWeather(ctx context.Context, latitude string, longitude string) (*Foreca
 	q := u.Query()
 	q.Set("latitude", latitude)
 	q.Set("longitude", longitude)
+
+	q.Set("hourly", "temperature_2m,rain,cloud_cover,relative_humidity_2m,snowfall,wind_direction_10m,wind_speed_10m")
 	u.RawQuery = q.Encode()
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
