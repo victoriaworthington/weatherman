@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"weather/internal/weather"
@@ -16,8 +17,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("latitude", f.Latitude)
-	fmt.Println("longitude", f.Longitude)
-	fmt.Println("elevation", f.Elevation)
-	fmt.Println("timezone", f.Timezone)
+	b, err := json.MarshalIndent(f, "", "  ")
+	if err != nil {
+		fmt.Println("error:", err)
+		return
+	}
+	fmt.Println(string(b))
 }
